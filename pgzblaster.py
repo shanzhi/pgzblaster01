@@ -9,16 +9,16 @@ class Ship(Actor):
         Actor.__init__(self, 'ship')
         self.bottom = HEIGHT
         self.centerx = WIDTH / 2
-        self.vel = 6
+        self.vel = 6#好
 
     def update(self):
         if keyboard.left:
             self.x -= self.vel
         if keyboard.right:
             self.x += self.vel
-        self.clamp_ip(0, 0, WIDTH, HEIGHT)
+        self.clamp_ip(0, 0, WIDTH, HEIGHT)#夹紧
 
-    def launch_rocket(self):
+    def launch_rocket(self):#发射
         rocket = Rocket(self.x, self.y-50)
         game.rockets.append(rocket)
 
@@ -56,7 +56,7 @@ class UFO(Actor):
         self.y = y
         self.x_vel = 2
         self.y_vel = 1
-        self.bomb_rate = 0.007
+        self.bomb_rate = 0.007#炸弹 速度
 
     def update(self):
         self.x += self.x_vel
@@ -76,7 +76,7 @@ class UFO(Actor):
         if self.colliderect(game.ship):
             game.ship.hit()
 
-    def drop_bomb(self):
+    def drop_bomb(self):#减少
         game.bombs.append(Bomb(self.center))
 
     def hit(self):
@@ -108,7 +108,7 @@ class Game:
         self.bombs = []
 
 
-def make_ufo_squadron(n_ufos):
+def make_ufo_squadron(n_ufos):#中队
     return [UFO(i*40, -i*40) for i in range(0, n_ufos)]
 
 
