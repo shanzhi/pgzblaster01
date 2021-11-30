@@ -1,4 +1,4 @@
-import random, time, sys
+import random, time, sys#装载机
 import pygame, pgzrun
 
 WIDTH, HEIGHT = 500, 700
