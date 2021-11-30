@@ -1,25 +1,25 @@
-import random, time, sys#装载机
+import random, time, sys#装载机 干净，利落。
 import pygame, pgzrun
 
-WIDTH, HEIGHT = 500, 700
+WIDTH, HEIGHT = 500, 700#画面不适中， 无背景
 
 
 class Ship(Actor):
     def __init__(self):
-        Actor.__init__(self, 'ship')
+        Actor.__init__(self, 'ship')#套路 头文字
         self.bottom = HEIGHT
         self.centerx = WIDTH / 2
-        self.vel = 6#好
+        self.vel = 6#好 +速
 
     def update(self):
-        if keyboard.left:
+        if keyboard.A:
             self.x -= self.vel
-        if keyboard.right:
+        if keyboard.D:
             self.x += self.vel
-        self.clamp_ip(0, 0, WIDTH, HEIGHT)#夹紧
+        self.clamp_ip(0, 0, WIDTH, HEIGHT)#夹紧 微调
 
     def launch_rocket(self):#发射
-        rocket = Rocket(self.x, self.y-50)
+        rocket = Rocket(self.x, self.y-50)#箭位
         game.rockets.append(rocket)
 
     def hit(self):
@@ -32,7 +32,7 @@ class Rocket(Actor):
     def __init__(self, x, y):
         Actor.__init__(self, 'rocket')
         sounds.rocket_launch.play()
-        self.alive = True
+        self.alive = True#旗帜
         self.x = x
         self.y = y
         self.vel = 10
@@ -101,7 +101,7 @@ class Bomb(Actor):
 
 
 class Game:
-    def __init__(self):
+    def __init__(self):#初始化
         self.ship = Ship()
         self.rockets = []
         self.ufos = []
@@ -116,9 +116,8 @@ def decide(chance):
     return random.random() < chance
 
 
-def on_key_down():
-    if keyboard.space:
-        game.ship.launch_rocket()
+def on_mouse_down():
+    game.ship.launch_rocket()
 
 
 def update():
@@ -131,7 +130,7 @@ def update():
     game.bombs = [b for b in game.bombs if b.alive]
 
     if len(game.ufos) == 0:
-        game.ufos = make_ufo_squadron(10)
+        game.ufos = make_ufo_squadron(5)#不死乔
 
 
 def draw():
