@@ -142,6 +142,6 @@ def draw():
 
 
 game = Game()
-pygame.mixer.quit()
+pygame.mixer.quit()#搅拌机
 pygame.mixer.init(44100, -16, 2, 1024)
 pgzrun.go()
